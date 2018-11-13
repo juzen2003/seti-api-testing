@@ -1,15 +1,19 @@
+# This class is to build up testing APIs for either production or dev sites
 class Api:
     # slugs for testing
     payload1 = {"planet": "Saturn", "target": "Pluto", "limit": 2}
-    payload2 = {"planet": "Earth", "target": "Pluto", "mission": "Hubble", "limit": 2}
+    payload2 = {"planet": "Earth", "target": "Moon", "mission": "Hubble", "limit": 2}
     payload3 = {"planet": "Earth", "target": "Moon", "limit": 2}
-    payload4 = {"planet": "Earth", "target": "Moon", "mission": "Cassini", "limit": 2}
+    payload4 = {"planet": "Earth", "target": "Moon", "mission": "Hubble", "limit": 2}
     payload5 = {"planet": "Mars", "target": "Mars", "instrument": "Hubble WFC3", "limit": 2} # Hubble+WFC3
     payload6 = {"cats": "PDS Constraints"}
     payload7 = {"planet": "Jupiter", "limit": 2}
 
     def __init__(self, target="production"):
         self.target = target
+        self.build_all_testing_api()
+
+    def build_all_testing_api(self):
         self.api_base = self.build_api_base()
         self.api_data_base = self.build_api_data_base()
         self.api_metadata_base = self.build_api_metadata_base()
@@ -28,7 +32,6 @@ class Api:
         self.api_all_fields_base = self.build_api_all_fields_base()
         self.api_dict = self.build_api_dict()
 
-
     def build_api_base(self):
         if self.target == "production":
             return "https://tools.pds-rings.seti.org/opus/api/"
@@ -45,7 +48,7 @@ class Api:
         if self.target == "production":
             return self.api_base + "metadata/VGISS_7204-C26548XX-C2654853."
         elif self.target == "dev":
-            return self.api_base + "metadata/hst-07717-wfpc2-u4ym0302."
+            return self.api_base + "metadata/vg-iss-1-j-c1466833."
 
     # api/metadata_v2/[opus_id].[fmt]
     def build_api_metadata_v2_base(self):
@@ -67,14 +70,14 @@ class Api:
         if self.target == "production":
             return self.api_base + "image/full/HSTU0_7717-V03-U4YM0303R."
         elif self.target == "dev":
-            return self.api_base + "image/full/hst-07717-wfpc2-u4ym0302."
+            return self.api_base + "image/full/nh-lorri-lor_0235006328."
 
     # api/files/[opus_id].[fmt]
     def build_api_files_with_opus_id_base(self):
         if self.target == "production":
             return self.api_base + "files/NHJULO_x001-20070115_003120-lor_0031203239_0x630."
         elif self.target == "dev":
-            return self.api_base + "files/hst-07717-wfpc2-u4ym0302."
+            return self.api_base + "files/hst-05836-wfpc2-u2tf0107."
 
     # api/files.[fmt]
     def build_api_all_files_base(self):
