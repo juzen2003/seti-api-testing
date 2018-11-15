@@ -1,6 +1,11 @@
 ## API testing notes
-### return file format testing
-* Make sure all supported return formats are valid
+
+* Make sure all supported return formats are valid (Issue #377)
+  * json
+  * html
+  * zip
+  * csv
+* Test of VIMS products returned for observations with multiple downlink numbers (Issue #482)
 
 ### Setup
 * virtualenv venv
